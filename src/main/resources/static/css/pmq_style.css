@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+/* user */
+#wrap {margin:auto; width:700px;}
+header {height:100px;}
+#logo {color:#000; font-weight:bold; font-size:30px;}
+section {width:250px;}
+#signinBtn {color:#fff; background-color:transparent;}
+#signupBtn {color:#fff;}
+#signupLink {color:#000;}
+#profileImg {border-radius:70%; overflow:hidden;}
+
+/* timeline */
+#timelineHeader {height:180px;}
+#timelineWrap {margin:auto; width:900px;}
+#timelineAround {width:900px;}
+#timelineLogo {color:#000; font-weight:bold; font-size:60px;} 
+#signInUpUrl {color:#000; font-weight:bold;}
+#editionFrame {width:300px; height:300px;}
+#searchBtn {color:#fff;}
+#searchResult {height:30px; width:900px;}
+#timelineSection {width:900px;}
+#timelineFlex {width:900px;}
+
+/* gnb(general) */
+#gnbHeader {height:80px;}
+#gnbLogo {color:#000; font-weight:bold; font-size:20px;}
+#userProfileMove {color:#000;}
+
+/* edition */
+#editionCreateSection {width:600px;}
+#createBtn {color:#fff;}
+
+/* edition detail(publisher)*/
+#editionDetailDiv {width:600px;}
+#editionDelBtn {color:#fff;}
+#editionAltBtn {color:#fff;}
+#excelDownloadBtn {color:#fff;}
+
+/* edition detail(subscriber)*/
+#startSubscribeBtn {color:#fff;}
+#cancelSubscribeBtn {color:#fff;}
+
+/* edition update/ delete */
+#updateBtn {color:#fff;}
+
+/* publication */
+#publicationCreateSection {width:600px;}
+#draftBtn {color:#fff;}
+#sendOutBtn {color:#fff;}
+#publicationSubject {color:#000;}
+
+/* user profile */
+#updateProfileBtn {color:#fff;}
+#signOutBtn {color:#fff;}

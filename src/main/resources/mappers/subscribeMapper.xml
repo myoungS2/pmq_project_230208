@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pmq.subscribe.dao.SubscribeDAO">
+	<select id="selectSubscribeByEditionIdOrUserId" parameterType="map" resultType="int">
+		SELECT
+ 			count(1)
+ 		FROM
+ 			`subscribe`
+ 		WHERE
+ 			`editionId` = #{editionId}
+ 			<if test="userId != null">
+ 				AND `userId` = #{userId}
+ 			</if>
+	</select>
+	<insert id="insertSubscribe" parameterType="map">
+ 		INSERT INTO `subscribe`
+ 		(
+ 			 `userId`
+ 			, `userLoginId`
+ 			, `userEmail`
+ 			, `editionId`
+ 			, `createdAt`
+ 		)
+ 		VALUES
+ 		(
+ 			 #{userId}
+ 			, #{userLoginId}
+ 			, #{userEmail}
+ 			, #{editionId}
+ 			, now()
+ 		)
+ 	</insert>	
+ 	<delete id="deleteSubscribe" parameterType="map">
+ 		DELETE
+ 		FROM
+ 			`subscribe`
+ 		WHERE
+ 			`editionId` = #{editionId}
+ 			AND `userId` = #{userId}
+ 	</delete>
+ 	<select id="selectSubscribeList" parameterType="int" resultType="com.pmq.subscribe.model.Subscribe">
+ 		SELECT 
+ 			`id`
+			, `userId`
+			, `userLoginId`
+			, `userEmail`
+			, `editionId`
+			, `createdAt`
+ 		FROM
+ 			`subscribe`
+ 		WHERE
+ 			`editionId`	= #{editionId}
+ 	</select>
+ 	<select id="selectSubscribeListByUserId" parameterType="int" resultType="com.pmq.subscribe.model.Subscribe">
+ 		SELECT 
+ 			`id`
+			, `userId`
+			, `userLoginId`
+			, `userEmail`
+			, `editionId`
+			, `createdAt`
+ 		FROM
+ 			`subscribe`
+ 		WHERE
+ 			`userId` = #{userId}
+ 	</select>
+ 	<delete id="deleteSubscribeByEditionId" parameterType="int">
+ 		DELETE
+ 		FROM
+ 			`subscribe`
+ 		WHERE
+ 			`editionId` = #{editionId}
+ 	</delete>
+<!--  	<select id="selectSubscribeEdtionList" resultType="map">
+  		SELECT 
+ 			a.`userId`, a.`editionId`, a.`createdAt`, b.`id`, b.`userId`, b.`thumbnailPath`
+ 		FROM `edition` AS b	
+        LEFT JOIN `subscribe` AS a
+ 		ON a.`editionId` = b.`id`
+ 		ORDER BY	
+ 			a.`createdAt` DESC
+ 	</select> -->
+</mapper>

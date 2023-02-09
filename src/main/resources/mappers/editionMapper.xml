@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.pmq.edition.dao.EditionDAO">
+ 	<insert id="insertEdition" parameterType="map">
+ 		INSERT INTO `edition`	
+ 		(
+	 		`userId`
+	 		,`userLoginId`
+	 		,`thumbnailPath`
+	 		,`subject`
+	 		,`category`
+	 		,`publishingDate`
+	 		,`content`
+	 		,`createdAt`
+	 		,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			,#{userLoginId}
+	 		,#{thumbnailPath}
+	 		,#{subject}
+	 		,#{category}
+	 		,#{publishingDate}
+	 		,#{content}
+	 		, NOW()
+	 		, NOW()
+ 		)
+ 	</insert>
+ 	<select id="selectEditionList" resultType="com.pmq.edition.model.Edition">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`userLoginId`
+			,`thumbnailPath`
+			,`subject`
+			,`category`
+			,`publishingDate`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`edition`
+		ORDER BY
+			`createdAt` DESC
+ 	</select>
+ 	<select id="selectEdition" resultType="com.pmq.edition.model.Edition">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`userLoginId`
+			,`thumbnailPath`
+			,`subject`
+			,`category`
+			,`publishingDate`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`edition`
+		WHERE 
+		 	`id` = #{id}
+ 	</select>
+ 	<update id="updateEdition" parameterType="map">
+ 		UPDATE `edition`
+ 		SET
+ 			`userId` = #{userId}
+	 		,`userLoginId`  = #{userLoginId}
+	 		<if test="thumbnailPath != null"> <!-- el표현식 아니고 그냥 thumbnailPath를 가져오면 됨 -->
+ 			,`thumbnailPath` = #{thumbnailPath}
+ 			</if>
+	 		,`subject` = #{subject}
+	 		,`category` = #{category}
+	 		,`publishingDate` = #{publishingDate}
+	 		,`content` = #{content}
+	 		,`updatedAt` = NOW()
+	 		
+ 		WHERE
+ 			`id` = #{id} 
+ 			AND `userId` = #{userId}
+ 	</update>
+ 	<delete id="deleteEdition" parameterType="int">
+ 		DELETE
+ 		FROM
+ 			`edition`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
+ 	<select id="selectEditionListByUserId" parameterType="int" resultType="com.pmq.edition.model.Edition">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`userLoginId`
+			,`thumbnailPath`
+			,`subject`
+			,`category`
+			,`publishingDate`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`edition`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY
+			`createdAt` DESC
+ 	</select>
+ 	<select id="selectEdtionListSubscribe" parameterType="int" resultType="com.pmq.edition.model.Edition">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`userLoginId`
+			,`thumbnailPath`
+			,`subject`
+			,`category`
+			,`publishingDate`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`edition`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY
+			`createdAt` DESC
+ 	</select>
+ 	<select id="selectEditionListByEditionId"  parameterType="int" resultType="com.pmq.edition.model.Edition">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`userLoginId`
+			,`thumbnailPath`
+			,`subject`
+			,`category`
+			,`publishingDate`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`edition`
+		WHERE
+			`id` = #{id}
+		ORDER BY
+			`createdAt` DESC
+ 	</select>
+ 	<select id="selectEditionListByKeyword" parameterType="String" resultType="com.pmq.edition.model.Edition">
+ 		SELECT 
+ 			`id`
+			,`userId`
+			,`userLoginId`
+			,`thumbnailPath`
+			,`subject`
+			,`category`
+			,`publishingDate`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`edition`
+		WHERE
+			`subject`
+			LIKE CONCAT('%', #{keyword} ,'%')
+			OR
+			`content`
+			LIKE CONCAT('%', #{keyword} ,'%')
+		ORDER BY
+			`createdAt` DESC	
+ 	</select>
+ </mapper>

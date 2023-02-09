@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.pmq.publication.dao.PublicationDAO">
+ 	<select id="selectPublicationListByUserIdAndEditionId" parameterType="map" resultType="com.pmq.publication.model.Publication">
+ 		SELECT
+ 			`id`
+ 			,`editionId`
+			, `userId`
+			, `userNickname`
+			, `subject`
+			, `content`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`publication`
+		WHERE
+			`userId` = #{userId}
+			AND `editionId` = #{editionId}
+ 	</select>
+ 	<insert id="insertPublication" parameterType="map">
+ 		INSERT INTO `publication`
+ 		(	
+ 			`editionId`
+			, `userId`
+			, `userNickname`
+			, `subject`
+			, `content`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+ 		)
+		VALUES
+		(
+ 			#{editionId}
+			, #{userId}
+			, #{userNickname}
+			, #{subject}
+			, #{content}
+			, #{state}
+			, NOW()
+			, NOW()
+		) 			
+ 	</insert>
+ 	<select id="selectPublicationById" parameterType="int" resultType="com.pmq.publication.model.Publication">
+ 		SELECT
+ 			`id`
+ 			,`editionId`
+			, `userId`
+			, `userNickname`
+			, `subject`
+			, `content`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`publication`
+		WHERE
+			`id` = #{id}
+ 	</select>
+ 	
+ </mapper>

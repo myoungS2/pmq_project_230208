@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.pmq.like.dao.LikeDAO">
+ 	<select id="selectLikeCountByEditionIdOrUserId" parameterType="map" resultType="int">
+ 		SELECT
+ 			count(1)
+ 		FROM
+ 			`like`
+ 		WHERE
+ 			`editionId` = #{editionId}
+ 			<if test="userId != null">
+ 			AND `userId` = #{userId}
+ 			</if>
+ 	</select>
+ 	<select id="selectLikeByEditionId" parameterType="int" resultType="int">
+ 		SELECT
+ 			count(1)
+ 		FROM
+ 			`like`
+ 		WHERE
+ 			`editionId` = #{editionId}
+ 	</select>
+ 	<insert id="insertLike" parameterType="map">
+ 		INSERT INTO `like`
+ 		(
+ 			 `userId`
+ 			, `userNickname`
+ 			, `editionId`
+ 			, `createdAt`
+ 		)
+ 		VALUES
+ 		(
+ 			 #{userId}
+ 			, #{userNickname}
+ 			, #{editionId}
+ 			, now()
+ 		)
+ 	</insert>
+ 	<delete id="deleteLikeByEditionIdUserId" parameterType="map">
+ 		DELETE
+		FROM
+			`like`
+		WHERE
+			`editionId` = #{editionId}
+			AND `userId` = #{userId}
+ 	</delete>
+ 	<select id="selectLikeListByUserId" parameterType="int" resultType="com.pmq.like.model.Like">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`userNickname`
+			,`editionId`
+			,`createdAt`
+ 		FROM
+ 			`like`
+ 		WHERE
+ 			`userId` = #{userId}
+ 	</select>
+ 	<delete id="deleteLikeByEditionId" parameterType="int">
+ 		DELETE
+		FROM
+			`like`
+		WHERE
+			`editionId` = #{editionId}
+ 	</delete>
+ </mapper>

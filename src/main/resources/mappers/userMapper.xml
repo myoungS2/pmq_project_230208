@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.pmq.user.dao.UserDAO">
+ 	<select id="existLoginId" parameterType="String" resultType="boolean">
+ 		SELECT
+ 			count(1)
+ 		FROM
+ 			`user`
+ 		WHERE
+ 			`loginId` = #{loginId}	
+ 	</select>
+ 	<select id="existNickname" parameterType="String" resultType="boolean">
+ 		SELECT
+ 			count(1)
+ 		FROM
+ 			`user`
+ 		WHERE
+ 			`nickname` = #{nickname}	
+ 	</select>
+ 	<insert id="insertUser" parameterType="map">
+ 		INSERT INTO `user`
+ 		(
+	 		`loginId`
+			,`password`
+			,`profileImgPath`
+			,`name`
+			,`nickname`
+			,`email`
+			,`address`
+			,`website`
+			,`introduce`
+			,`role`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{loginId}
+ 			,#{password}
+ 			,#{profileImgPath}
+ 			,#{name}
+ 			,#{nickname}
+ 			,#{email}
+ 			,#{address}
+ 			,#{website}
+ 			,#{introduce}
+ 			,#{role}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	<select id="selectUserByLoginIdAndPassword" parameterType="map" resultType="com.pmq.user.model.User">
+ 		SELECT 
+ 			`id`
+			,`loginId`
+			,`password`
+			,`profileImgPath`
+			,`name`
+			,`nickname`
+			,`email`
+			,`address`
+			,`website`
+			,`introduce`
+			,`role`
+			,`createdAt`
+			,`updatedAt`
+		FROM 
+			`user`	
+		WHERE
+			`loginId` = #{loginId}
+			AND `password` = #{password}
+ 	</select>
+ 	<select id="selectUser" parameterType="int" resultType="com.pmq.user.model.User">
+	 	SELECT 
+	 			`id`
+				,`loginId`
+				,`password`
+				,`profileImgPath`
+				,`name`
+				,`nickname`
+				,`email`
+				,`address`
+				,`website`
+				,`introduce`
+				,`role`
+				,`createdAt`
+				,`updatedAt`
+			FROM 
+				`user`	
+			WHERE
+				`id` = #{id}
+ 	</select>
+ 	<select id="selectPublisher" parameterType="int" resultType="com.pmq.user.model.User">
+	 	SELECT 
+	 			`id`
+				,`loginId`
+				,`password`
+				,`profileImgPath`
+				,`name`
+				,`nickname`
+				,`email`
+				,`address`
+				,`website`
+				,`introduce`
+				,`role`
+				,`createdAt`
+				,`updatedAt`
+			FROM 
+				`user`	
+			WHERE
+				`id` = #{id}
+ 	</select>
+ 	<update id="updateUser"  parameterType="map">
+ 		UPDATE `user`
+ 		SET
+	 		<if test="profileImgPath != null"> <!-- el표현식 아니고 그냥 profileImgPath를 가져오면 됨 -->
+ 			`profileImgPath` = #{profileImgPath}
+ 			</if>
+	 		,`nickname` = #{nickname}
+	 		,`email` = #{email}
+	 		,`address` = #{address}
+	 		,`website` = #{website}
+	 		,`introduce` = #{introduce}
+	 		,`updatedAt` = NOW()
+	 	WHERE
+	 		`id` = #{id}
+ 	</update>
+ 	<select id="selectUserById" parameterType="int" resultType="com.pmq.user.model.User">
+	 	SELECT 
+	 			`id`
+				,`loginId`
+				,`password`
+				,`profileImgPath`
+				,`name`
+				,`nickname`
+				,`email`
+				,`address`
+				,`website`
+				,`introduce`
+				,`role`
+				,`createdAt`
+				,`updatedAt`
+			FROM 
+				`user`	
+			WHERE
+				`id` = #{id}
+ 	</select>
+ </mapper>
